@@ -28,7 +28,7 @@ class Musica {
         nome = json['Track Name'] as String,
         album= json['Album Name'] as String,
         artista= json['Artist Name(s)'] as String,
-        lancamento=DateTime.parse(json['Release Date']),
+        lancamento=Musica.tratarData(json['Release Date']),
         duracao = json['Duration (ms)'] as double,
         generos= json['Genres'] as String ;
 
@@ -37,7 +37,7 @@ class Musica {
         'Track Name': nome,
         'Album Name': album,
         'Artist Name(s)': artista,
-        //'Release Date': lancamento,
+        'Release Date': lancamento,
         'Duration (ms)':duracao,
         'Genres': generos,
       };
@@ -51,10 +51,10 @@ class Musica {
     
     return d;
   }
-  tratarData(String dt)
+ static DateTime tratarData(String dt)
   {
    
-final d = lancamento.toString().split(' ');
+final d = dt.toString().split(' ');
 final ano = d[0].isEmpty?2000:d[0];
  final mes = d[1].isEmpty?01:d[1];
  final dia = d[2].isEmpty?01:d[2];
@@ -64,4 +64,4 @@ final ano = d[0].isEmpty?2000:d[0];
   { 
     return duracao.toString();
   }
-} 
+}
