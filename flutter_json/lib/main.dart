@@ -31,16 +31,16 @@ Musica musicaSorteada  = Musica();
 int total = 0;
  Future<void> readJson() async {
     final String response = await rootBundle.loadString('assets/liked_songs.json');
-    final data = await json.decode(response);
-   
-    await for (var mus in data) {
-     var m =  Musica.fromJson(mus);
-     addLista(m);
-    }
+     Iterable data = await json.decode(response);
+    musicas =  List<Musica>.from(data.map((model)=> Musica.fromJson(model)));
+    
   }
 
+
+
+
 Future<void> _abreSpotify(String id) async {
-  String str = "https://open.spotify.com/track/"+ id;
+  String str = "https://open.spotify.com/track/$id";
   final Uri url = Uri.parse(str);
    if (!await launchUrl(url)) {
         throw Exception('Could not launch $url');
@@ -66,9 +66,10 @@ sorteiaMusica()
 
 
   @override
-  void initState() {
+   initState()  {
     super.initState();
-    readJson();
+       readJson();
+    
     }
 
   @override
@@ -82,7 +83,7 @@ sorteiaMusica()
            //com distribuição uniforme
            mainAxisAlignment: MainAxisAlignment.spaceAround,
            children:<Widget>[ 
-             Text('Sorteie Uma das ${total} Músicas!'),
+             Text('Sorteie uma das $total Músicas!'),
             
             
             ElevatedButton(onPressed:sorteiaMusica, child: const Text("Sorteio")),
