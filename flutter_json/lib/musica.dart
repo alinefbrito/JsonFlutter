@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_this
+
 class Musica {
   late String trackID;
   late String nome;
@@ -35,19 +37,28 @@ class Musica {
         'Track Name': nome,
         'Album Name': album,
         'Artist Name(s)': artista,
-        'Release Date': lancamento,
+        //'Release Date': lancamento,
         'Duration (ms)':duracao,
         'Genres': generos,
       };
       String dataLancFormatada()
   { 
-    //sepsara a data em um vetor
+    //separa a data em um vetor
     final dt = lancamento.toString().split(' ');
    //pega apenas a parte da data e descosidera a hora e separa em um novo vetor 
     //escreve o vetor de trás pra frente( dd/mm/aaaa) e junta novamente
     final d = dt[0].split('-').reversed.join('/');
     
     return d;
+  }
+  tratarData(String dt)
+  {
+   
+final d = lancamento.toString().split(' ');
+final ano = d[0].isEmpty?2000:d[0];
+ final mes = d[1].isEmpty?01:d[1];
+ final dia = d[2].isEmpty?01:d[2];
+    return DateTime(ano as int,mes as int,dia as int);
   }
   String tempo()
   { 
