@@ -53,7 +53,7 @@ class Musica {
   }
   tratarData(String dt)
   {
-    DateTime data;
+   
 final d = lancamento.toString().split(' ');
 final ano = d[0].isEmpty?2000:d[0];
  final mes = d[1].isEmpty?01:d[1];
