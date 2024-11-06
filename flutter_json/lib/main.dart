@@ -40,7 +40,7 @@ int total = 0;
   }
 
 Future<void> _abreSpotify(String id) async {
-  String str = "https://open.spotify.com/track/"+ id;
+  String str = "https://open.spotify.com/track/$id";
   final Uri url = Uri.parse(str);
    if (!await launchUrl(url)) {
         throw Exception('Could not launch $url');
@@ -82,7 +82,7 @@ sorteiaMusica()
            //com distribuição uniforme
            mainAxisAlignment: MainAxisAlignment.spaceAround,
            children:<Widget>[ 
-             Text('Sorteie Uma das ${total} Músicas!'),
+             Text('Sorteie Uma das $total Músicas!'),
             
             
             ElevatedButton(onPressed:sorteiaMusica, child: const Text("Sorteio")),

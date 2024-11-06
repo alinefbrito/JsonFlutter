@@ -9,12 +9,12 @@ class Musica {
   Musica()
   {
     nome = "";
-    this.artista = "";
-    this.album = "";
-    this.duracao = 0;
-    this.generos="";
-  this.lancamento = DateTime.now();
-  this.trackID ="";
+    artista = "";
+    album = "";
+    duracao = 0;
+    generos="";
+  lancamento = DateTime.now();
+  trackID ="";
 
   }
   Musica.v(this.trackID,this.nome, this.album, this.artista, this.lancamento, this.duracao, this.generos);
