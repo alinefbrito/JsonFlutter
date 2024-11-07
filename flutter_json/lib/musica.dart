@@ -54,11 +54,18 @@ class Musica {
  static DateTime tratarData(String dt)
   {
    
-final d = dt.toString().split(' ');
+    final d = dt.toString().split('-');
+    if(d.length==1) {
+    return DateTime(int.parse(d[0]));
+}
+if(d.length>1)
+{
 final ano = d[0].isEmpty?2000:d[0];
  final mes = d[1].isEmpty?01:d[1];
  final dia = d[2].isEmpty?01:d[2];
-    return DateTime(ano as int,mes as int,dia as int);
+    return DateTime(int.parse(ano.toString()),int.parse(mes.toString()), int.parse(dia.toString()));
+}
+  return DateTime.now();
   }
   String tempo()
   { 
