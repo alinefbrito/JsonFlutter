@@ -100,11 +100,11 @@ sorteiaMusica()
            //com distribuição uniforme
            mainAxisAlignment: MainAxisAlignment.spaceBetween,
            children:<Widget>[ 
-             Text('Sorteie uma das $total Músicas!', style: const TextStyle(color: Color.fromRGBO(73, 36, 62, 1), fontSize: 40, fontStyle: FontStyle.italic),),
+             Text('Sorteie uma das $total Músicas!:)', style: const TextStyle(color: Color.fromRGBO(73, 36, 62, 1), fontSize: 40, fontStyle: FontStyle.italic),),
             
             
             ElevatedButton(onPressed:sorteiaMusica,style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromRGBO(187,132 , 147, 1),fixedSize: const Size(250, 75)), child: const Text("Sorteio!!!",style: TextStyle(color: Color.fromRGBO(73, 36, 62, 1),fontSize:30,fontWeight: FontWeight.bold),),),
+                backgroundColor: const Color.fromARGB(255, 64, 220, 111),fixedSize: const Size(250, 75)), child: const Text("Sorteio!!!",style: TextStyle(color: Color.fromRGBO(73, 36, 62, 1),fontSize:30,fontWeight: FontWeight.bold),),),
            Visibility(
   visible: mostrarMusica,
   child:Expanded(child: Column( 
@@ -133,7 +133,7 @@ sorteiaMusica()
                                   fontWeight: FontWeight.w400),),
             ElevatedButton(onPressed: () => _abreSpotify(musicaSorteada.trackID),
                     style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromRGBO(219,175 , 160, 1),
+                    backgroundColor: const Color.fromARGB(255, 80, 60, 120),
                     fixedSize: const Size(275, 75)), 
                  child: const Text('Ouvir no Spotify!', 
                  style: TextStyle(color: Color.fromRGBO(73, 36, 62, 1),
