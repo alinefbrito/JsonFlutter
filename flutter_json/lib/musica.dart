@@ -21,6 +21,11 @@ class Musica {
   }
   Musica.v(this.trackID,this.nome, this.album, this.artista, this.lancamento, this.duracao, this.generos);
 
+Musica.x( String id, String musica)
+{
+  this.trackID=id;
+  this.nome = musica;
+}
   
 
   Musica.fromJson(Map<String, dynamic> json)
@@ -41,7 +46,9 @@ class Musica {
         'Duration (ms)':duracao,
         'Genres': generos,
       };
-      String dataLancFormatada()
+
+
+     String dataLancFormatada()
   { 
     //separa a data em um vetor
     final dt = lancamento.toString().split(' ');

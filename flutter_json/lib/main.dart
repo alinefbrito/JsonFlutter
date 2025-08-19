@@ -33,6 +33,26 @@ Musica musicaSorteada  = Musica();
 int total = 0;
  Future<void> readJson() async {
     final String response = await rootBundle.loadString('assets/liked_songs.json');
+    //  final String response = ""{
+   /* "Track ID": "5eWgDlp3k6Tb5RD8690s6I",
+   "Track Name": "Sugar",
+   "Album Name": "V (Deluxe)",
+   "Artist Name(s)": "Maroon 5",
+   "Release Date": "2014-09-02",
+   "Duration (ms)": 235493,
+   "Genres": "pop"
+ },
+ {
+   "Track ID": "2X59ZxwE9x4pWnxsxKhr1E",
+   "Track Name": "Behind Blue Eyes",
+   "Album Name": "Who's Next (Remastered)",
+   "Artist Name(s)": "The Who",
+   "Release Date": "1971-08-14",
+   "Duration (ms)": 221693,
+   "Genres": "album rock,british invasion,classic rock,hard rock,rock"
+ }
+]"" */
+
      Iterable data = await json.decode(response);
     musicas =  List<Musica>.from(data.map((model)=> Musica.fromJson(model)));
     total = musicas.length;
@@ -71,7 +91,7 @@ sorteiaMusica()
     super.initState();
        readJson();
 
-        _detector = ShakeDetector.autoStart(
+    /*     _detector = ShakeDetector.autoStart(
       onPhoneShake: () {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -85,7 +105,7 @@ sorteiaMusica()
       shakeCountResetTime: 3000,
       shakeThresholdGravity: 2.7,
     );
-    
+     */
     }
 
   @override
