@@ -16,6 +16,7 @@ void main() {
       home: MainApp(),));
 }
 
+//Cria uma classe StatefulWidget
 class MainApp extends StatefulWidget {
   const MainApp({super.key});
 
@@ -24,18 +25,39 @@ class MainApp extends StatefulWidget {
   MainAPP createState() => MainAPP();
 }
 
+//
+//Cria a classe de estado
 class MainAPP extends State<MainApp> {
- // ignore: unused_field
- late ShakeDetector _detector;
+
+ 
 bool mostrarMusica = false;
 List<Musica> musicas=List.empty();                                      
 Musica musicaSorteada  = Musica();
 int total = 0;
+
+//método assincrono para ler o json
  Future<void> readJson() async {
+  //lê o arquivo json da pasta assets
+  //o arquivo deve ser declarado no pubspec.yaml
+  //await indica que o método é assíncrono e deve esperar o resultado
+  //rootBundle é um objeto que permite acessar os arquivos da pasta assets
+  //loadString lê o arquivo como uma string
+  //final indica que a variável não pode ser alterada depois de inicializada
     final String response = await rootBundle.loadString('assets/liked_songs.json');
+     //decodifica o json
+     //json.decode converte a string em um objeto dinâmico
+     //Iterable é uma coleção de elementos que podem ser percorridos
+     
      Iterable data = await json.decode(response);
-    musicas =  List<Musica>.from(data.map((model)=> Musica.fromJson(model)));
+      //converte o json para uma lista de objetos do tipo Musica
+      //List.from cria uma lista a partir de uma coleção
+      //map é um método que aplica uma função a cada elemento da coleção
+     //model é o elemento atual da coleção
+     //Musica.fromJson(model) cria o objeto do tipo Musica a partir do json
+         musicas =  List<Musica>.from(data.map((model)=> Musica.fromJson(model)));
+    //pega o total de músicas
     total = musicas.length;
+    //define que o estado do objeto foi alterado
     setState(() {
       musicas;
       total;
@@ -44,20 +66,29 @@ int total = 0;
 
 
 
-
+//método assincrono para abrir o spotify a partir do id da música
 Future<void> _abreSpotify(String id) async {
+  //cria a url do spotify
   String str = "https://open.spotify.com/track/$id";
+  //converte a string para um Uri
+  //Uri == Uniform Resource Identifier
   final Uri url = Uri.parse(str);
+  //tenta abrir a url utilizando o pacote url_launcher
    if (!await launchUrl(url)) {
+    //se não conseguir abrir a url, lança uma exceção
         throw Exception('Could not launch $url');
     }}
 
 sorteiaMusica()
 {
+  //cria um objeto da classe Random
   var r = Random();
+  //sorteia um número entre 0 e o total de músicas
   var index = r.nextInt(musicas.length);
+  //pega a música sorteada
    musicaSorteada =  musicas[index];
    mostrarMusica = true;
+   //define que o estado do objeto foi alterado
   setState(() {
    musicaSorteada;
    mostrarMusica;}
@@ -65,29 +96,18 @@ sorteiaMusica()
 
 }
 
-
+//método chamado quando o estado do objeto é criado
   @override
    initState()  {
+    //chama o método initState da superclasse que é StatefulWidget
     super.initState();
+    //chama o método para ler o json
        readJson();
 
-        _detector = ShakeDetector.autoStart(
-      onPhoneShake: () {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Sorteando!'),
-          ),
-        );
-        sorteiaMusica();
-      },
-      minimumShakeCount: 1,
-      shakeSlopTimeMS: 500,
-      shakeCountResetTime: 3000,
-      shakeThresholdGravity: 2.7,
-    );
+       
     
     }
-
+//método que constrói a interface do usuário
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

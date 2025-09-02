@@ -1,6 +1,7 @@
-// ignore_for_file: unnecessary_this
-
+//classe para representar uma música
 class Musica {
+  //late indica que a variável será inicializada depois do construtor
+  //final indica que a variável não pode ser alterada depois de inicializada
   late String trackID;
   late String nome;
   late String album;
@@ -8,6 +9,7 @@ class Musica {
   late DateTime lancamento;
   late double duracao;
   late String generos;
+  //construtor padrão
   Musica()
   {
     nome = "";
@@ -19,9 +21,12 @@ class Musica {
   trackID ="";
 
   }
+  //construtor nomeado necessário para criar o objeto a partir do json
+  //construtor nomeado é chamado com o nome da classe seguido de um ponto e o nome do construtor
   Musica.v(this.trackID,this.nome, this.album, this.artista, this.lancamento, this.duracao, this.generos);
 
   
+//método necessário para criar o objeto a partir do json
 
   Musica.fromJson(Map<String, dynamic> json)
       : trackID = json['Track ID'] as String,
@@ -31,7 +36,8 @@ class Musica {
         lancamento=Musica.tratarData(json['Release Date']),
         duracao = json['Duration (ms)'] as double,
         generos= json['Genres'] as String ;
-
+//método necessário para converter o objeto em json
+//útil para salvar o objeto em um arquivo ou enviar para uma API
   Map<String, dynamic> toJson() => {
         'Track ID': trackID,
         'Track Name': nome,
@@ -41,6 +47,8 @@ class Musica {
         'Duration (ms)':duracao,
         'Genres': generos,
       };
+      //método para formatar a data de lançamento no formato dd/mm/aaaa
+      //ex: 2020-05-01 -> 01/05/2020
       String dataLancFormatada()
   { 
     //separa a data em um vetor
@@ -51,6 +59,9 @@ class Musica {
     
     return d;
   }
+  //método estático para tratar a data que pode vir em diferentes formatos
+  //ex: "2020-05-01", "2020-05", "2020"
+  //se a data estiver incompleta, preenche com 01 para dia e mês
  static DateTime tratarData(String dt)
   {
    
